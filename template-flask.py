@@ -21,5 +21,11 @@ def user(username):
 def user_id(user_id):
     return 'user_id %d' % user_id
 
+# 制定多个路由规则
+@app.route('/user/info/')
+@app.route('/user/information/')
+def user_info():
+    return 'user info is right'
+
 if __name__ == '__main__':
     app.run(debug=True)

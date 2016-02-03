@@ -22,6 +22,11 @@ app = Flask(__name__)
 
 @app.route('/login',methods=['GET','POST'])
 def login():
+    # 获取表单数据
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        print username,password
     return render_template('login.html',method=request.method)
 if __name__ == '__main__':
     app.run(debug=True)

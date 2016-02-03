@@ -13,5 +13,13 @@ def hello_world():
 def about():
     return 'about'
 
+# 简单动态路由
+@app.route('/user/<username>')
+def user(username):
+    return username
+@app.route('/user/<int:user_id>')
+def user_id(user_id):
+    return 'user_id %d' % user_id
+
 if __name__ == '__main__':
     app.run(debug=True)

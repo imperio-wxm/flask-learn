@@ -7,9 +7,11 @@
 <body>
 <h2>My name is wxmimperio</h2>
 
-<p style="color:red">{{ title }}</p>
-<nav>
+<p style="color:red">{{ title|safe }}</p>
+{#<nav>
     <a href="{{ url_for('.about') }}">About</a>
-</nav>
+</nav>#}
+<p style="color: cadetblue">{{ body|md|safe }}</p>
+{{ read_file('method-route.py') }}
 </body>
 </html>

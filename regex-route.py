@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 __author__ = 'wxmimperio'
 
-from flask import Flask,render_template
+from flask import Flask
 from werkzeug.routing import BaseConverter
 
 class RegexConverter(BaseConverter):

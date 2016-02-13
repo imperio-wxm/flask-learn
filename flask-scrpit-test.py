@@ -4,6 +4,7 @@ __author__ = 'wxmimperio'
 
 from flask import Flask
 from flask.ext.script import Manager
+from livereload import Server
 
 app = Flask(__name__)
 
@@ -16,7 +17,6 @@ def init_page():
 
 @manager.command
 def dev():
-    from livereload import Server
     live_server = Server(app.wsgi_app)
     live_server.watch('**/*.*')
     live_server.serve(open_url=True)

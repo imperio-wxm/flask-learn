@@ -1,0 +1,25 @@
+{#继承模板#}
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+{#定义变量#}
+{% set links=[
+    {'label':'Home','href':url_for('.about')},
+    {'label':'About','href':url_for('.about')},
+    {'label':'Context','href':url_for('.about')}
+] %}
+
+{#直接输出变量#}
+{#{{ links }}#}
+
+<nav>
+    {#for循环#}
+    {% for link in links %}
+        {#loop是for循环上下文变量,odd是测试函数#}
+        {% if not loop.first %} | {% endif %}
+            <a href={{ link.href }}>{{ link.label }}</a>
+    {% endfor %}
+</nav>
+{% endblock %}

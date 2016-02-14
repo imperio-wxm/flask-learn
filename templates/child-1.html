@@ -1,6 +1,12 @@
 {#继承模板#}
 {% extends 'base.html' %}
 
+{#宏的定义#}
+{% macro input(name,vlaue='',type='text',size=20) %}
+    <input type="{{ type }}" name="{{ name }}"
+           size="{{ size }}" value="{{ value}}"/>
+{% endmacro %}
+
 {% block title %}{{ title }}{% endblock title%}
 
 {% block content %}
@@ -31,4 +37,7 @@
     {{ super() }}
     <hr>
     <p style="color: red">This page footer</p>
+    {#宏的调用#}
+    {{ input('username') }}
+    {{ input('password',type='password') }}
 {% endblock footer %}

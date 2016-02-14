@@ -10,10 +10,10 @@
 <h2>My name is wxmimperio</h2>
 
 <p style="color:red">{{ title|safe }}</p>
-<nav>
+{#<nav>
     <a href="{{ url_for('.about') }}">About</a>
-</nav>
-{#<p style="color: cadetblue">{{ body|md|safe }}</p>
-{{ read_file('method-route.py') }}#}
+</nav>#}
+<p style="color: cadetblue">{{ body|md|safe }}</p>
+{{ read_file('method-route.py') }}
 </body>
 </html>

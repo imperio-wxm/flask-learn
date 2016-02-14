@@ -4,17 +4,18 @@ __author__ = 'wxmimperio'
 
 from flask import Flask,render_template
 from livereload import Server
+from markdown import markdown
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
     return render_template('index.html',title='<h1>Hello World</h1>',
-                           body='### Header2')
+                           body='- python Header2')
 
+# 过滤器装饰，过滤器名字叫md
 @app.template_filter('md')
 def markdown_to_html(txt):
-    from markdown import markdown
     return markdown(txt)
 
 def read_file(filename):

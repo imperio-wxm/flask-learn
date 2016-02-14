@@ -12,6 +12,7 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        # 写入cookie
         response.set_cookie(username,password)
         return response
     return render_template('login.html')

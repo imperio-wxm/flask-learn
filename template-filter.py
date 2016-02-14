@@ -19,10 +19,12 @@ def markdown_to_html(txt):
     return markdown(txt)
 
 def read_file(filename):
-    with open(filename) as md_file:
-        content = reduce(lambda x,y:x+y,md_file.readlines())
+    with open(filename) as file:
+        content = reduce(lambda x,y:x+y,file.readlines())
     return content.decode('utf-8')
 
+# 上下文处理器
+# 在模板渲染前使用
 @app.context_processor
 def inject_methods():
     return dict(read_file=read_file)

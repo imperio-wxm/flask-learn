@@ -14,6 +14,6 @@
     <a href="{{ url_for('.about') }}">About</a>
 </nav>#}
 <p style="color: cadetblue">{{ body|md|safe }}</p>
-{{ read_file('method-route.py') }}
+{{ read_file('method-route.py')|safe }}
 </body>
 </html>

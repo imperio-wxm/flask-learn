@@ -1,7 +1,7 @@
 {#继承模板#}
 {% extends 'base.html' %}
 
-{% block title %}{{ title }}{% endblock %}
+{% block title %}{{ title }}{% endblock title%}
 
 {% block content %}
 {#定义变量#}
@@ -22,4 +22,13 @@
             <a href={{ link.href }}>{{ link.label }}</a>
     {% endfor %}
 </nav>
-{% endblock %}
+    {#重新引用模板#}
+    <h2>{{ self.title() }}</h2>
+{% endblock content %}
+
+{#既使用模板，又使用本页特有#}
+{% block footer %}
+    {{ super() }}
+    <hr>
+    <p style="color: red">This page footer</p>
+{% endblock footer %}

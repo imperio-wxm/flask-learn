@@ -5,6 +5,7 @@ __author__ = 'wxmimperio'
 from flask import Flask
 from werkzeug.routing import BaseConverter
 
+# 正则表达式过滤定义
 class RegexConverter(BaseConverter):
     def __init__(self,url_map,*items):
         super(RegexConverter,self).__init__(url_map)

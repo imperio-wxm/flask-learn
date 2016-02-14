@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jinja2</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename="site.css") }}">
+</head>
+<body>
+{#定义变量#}
+{% set links=[
+    {'label':'About','href':url_for('.about')}
+] %}
+
+{#直接输出变量#}
+{{ links }}
+
+<nav>
+    {#for循环#}
+    {% for link in links %}
+        <a href={{ link.href }}>{{ link.label }}</a>
+    {% endfor %}
+</nav>
+</body>
+</html>

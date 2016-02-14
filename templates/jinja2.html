@@ -17,7 +17,11 @@
 <nav>
     {#for循环#}
     {% for link in links %}
-        <a href={{ link.href }}>{{ link.label }}</a>
+        {#loop是for循环上下文变量,odd是测试函数#}
+        {% if loop.index is odd %} | {% endif %}
+        {% if link is not current_link %}
+            <a href={{ link.href }}>{{ link.label }}</a>
+        {% endif %}
     {% endfor %}
 </nav>
 </body>

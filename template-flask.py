@@ -22,6 +22,7 @@ def user_id(user_id):
     return 'user_id %d' % user_id
 
 # 制定多个路由规则
+# 默认是指向index或者default
 @app.route('/user/info/')
 @app.route('/user/information/')
 def user_info():

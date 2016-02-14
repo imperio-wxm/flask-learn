@@ -3,14 +3,18 @@
 <head>
     {#模板块区#}
     {% block head %}
-        <meta charset="UTF-8">
-        {#子模板可以修改自己的title#}
-        <title>{% block title %}{% endblock %}</title>
+        {#引用其他模块内容#}
+        {% include ['includes/_head.html'] %}
     {% endblock %}
 </head>
 <body>
 <header>{% block header %}{% endblock %}</header>
 <div>{% block content %}{% endblock %}</div>
+
+{#当使用for循环+block时，需要添加scoped参数，保证for的作用域正确#}
+{% for item in items %}
+    <li>{% block loop_item scoped %}{{ item }}{% endblock %}</li>
+{% endfor %}
 <footer>
     {% block footer %}
         Copyright 2016 By <a href="wxmimperio.tk">Imperio</a>

@@ -1,0 +1,4 @@
+<meta charset="UTF-8">
+{#子模板可以修改自己的title#}
+<title>{% block title %}{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static',filename='site.css') }}"/>

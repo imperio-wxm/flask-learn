@@ -1,41 +1,25 @@
 {#继承模板#}
-{% extends 'bootstrap_base.html' %}
+{% extends "bootstrap/base.html" %}
 
 {% block title %}{{ title }}{% endblock title%}
 
-{% block content %}
-{#定义变量#}
-{% set links=[
-    {'label':'Home','href':url_for('.about')},
-    {'label':'About','href':url_for('.about')},
-    {'label':'Context','href':url_for('.about')}
-] %}
-
-{#直接输出变量#}
-{#{{ links }}#}
-
-<nav>
-    {#for循环#}
-    {% for link in links %}
-        {#loop是for循环上下文变量,odd是测试函数#}
-        {% if not loop.first %} | {% endif %}
-            <a href={{ link.href }}>{{ link.label }}</a>
-    {% endfor %}
-</nav>
-    {#重新引用模板#}
-    <h2>{{ self.title() }}</h2>
-    <form method="post">
-        <div>
-            <input type="text" name="username" placeholder="username">
+{% block navbar %}
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Flasky</a>
         </div>
-        <div>
-            <input type="password" name="password" placeholder="password">
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+            </ul>
         </div>
-        <input type="submit">
-    </form>
-{% endblock content %}
-
-{#既使用模板，又使用本页特有#}
-{% block footer %}
-    {{ super() }}
-{% endblock footer %}
+    </div>
+</div>
+{% endblock %}

@@ -10,13 +10,9 @@ app = Flask(__name__)
 # 注册bootstrap
 bootstrap = Bootstrap(app)
 
-@app.route('/',methods=['POST','GET'])
+@app.route('/')
 def flask_bootstrap_test():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        return username,password
-    return render_template('bootstrap_test.html',title='bootstrap_test',methods=request.method)
+    return render_template('bootstrap_test.html',title='bootstrap_test')
 
 @app.route('/about')
 def about():

@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def extends_test():
-    return render_template('child-1.html', title='child-1')
+    return render_template('child_1.html', title='child-1')
 
 @app.route('/about')
 def about():

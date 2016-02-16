@@ -3,7 +3,7 @@
 __author__ = "wxmimperio"
 
 from flask_bootstrap import Bootstrap
-from flask import Flask, render_template,request
+from flask import Flask, render_template
 from livereload import Server
 from flask_nav import Nav
 from flask_nav.elements import *
@@ -25,7 +25,7 @@ nav.init_app(app)
 
 @app.route('/')
 def flask_bootstrap_test():
-    return render_template('bootstrap-test.html', title='bootstrap_test')
+    return render_template('bootstrap_test.html', title='bootstrap_test')
 
 @app.route('/about')
 def about():

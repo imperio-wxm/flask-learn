@@ -3,14 +3,18 @@
 __author__ = "wxmimperio"
 
 from flask_bootstrap import Bootstrap
-from flask import Flask, template_rendered
+from flask import Flask, render_template,request
 from livereload import Server
 
 app = Flask(__name__)
 
 @app.route('/',methods=['POST','GET'])
 def flask_bootstrap_test():
-    return template_rendered('flask_bootstrap_test.html',title='bootstrap_test')
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        return username,password
+    return render_template('bootstrap_test.html',title='bootstrap_test',methods=request.method)
 
 if __name__ == '__main__':
     live_server = Server(app.wsgi_app)

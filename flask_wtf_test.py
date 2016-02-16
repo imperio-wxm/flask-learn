@@ -21,5 +21,4 @@ def loginTest():
 if __name__ == '__main__':
     live_server = Server(app.wsgi_app)
     live_server.watch('**/*.*')
-    live_server.serve(open_url=False)
-    live_server.application(debug=True)
+    live_server.serve(open_url=False,debug=True)

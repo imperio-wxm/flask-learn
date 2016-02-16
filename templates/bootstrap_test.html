@@ -1,11 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>bootstrap_test</title>
-</head>
-<body>
-    <h1>HTTP 方法:{{ method }}</h1>
+{#继承模板#}
+{% extends 'bootstrap_base.html' %}
+
+{% block title %}{{ title }}{% endblock title%}
+
+{% block content %}
+{#定义变量#}
+{% set links=[
+    {'label':'Home','href':url_for('.about')},
+    {'label':'About','href':url_for('.about')},
+    {'label':'Context','href':url_for('.about')}
+] %}
+
+{#直接输出变量#}
+{#{{ links }}#}
+
+<nav>
+    {#for循环#}
+    {% for link in links %}
+        {#loop是for循环上下文变量,odd是测试函数#}
+        {% if not loop.first %} | {% endif %}
+            <a href={{ link.href }}>{{ link.label }}</a>
+    {% endfor %}
+</nav>
+    {#重新引用模板#}
+    <h2>{{ self.title() }}</h2>
     <form method="post">
         <div>
             <input type="text" name="username" placeholder="username">
@@ -15,5 +33,9 @@
         </div>
         <input type="submit">
     </form>
-</body>
-</html>
+{% endblock content %}
+
+{#既使用模板，又使用本页特有#}
+{% block footer %}
+    {{ super() }}
+{% endblock footer %}

@@ -3,6 +3,9 @@
 
 {% block content %}
     <div class="container">
+        {% for message in get_flashed_messages() %}
+            <div class="alert-info">{{ message }}</div>
+        {% endfor %}
         <form method="post">
             {{ form.username.label }}
             {{ form.username() }}

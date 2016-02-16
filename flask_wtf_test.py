@@ -2,7 +2,7 @@
 #-*- coding: utf-8 -*-
 __author__ = "wxmimperio"
 
-from flask import Flask,render_template
+from flask import Flask,render_template,flash
 from livereload import Server
 from flask_wtf_form import loginForm
 from flask_bootstrap import Bootstrap
@@ -16,6 +16,7 @@ app.config.from_pyfile('config')
 def loginTest():
     # 引入登陆方法
     form = loginForm()
+    flash(u'登陆成功')
     return render_template('flask_wtf_form.html',form=form,title=u'登陆')
 
 if __name__ == '__main__':

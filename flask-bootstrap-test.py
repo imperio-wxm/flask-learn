@@ -12,7 +12,7 @@ bootstrap = Bootstrap(app)
 
 @app.route('/')
 def flask_bootstrap_test():
-    return render_template('bootstrap_test.html',title='bootstrap_test')
+    return render_template('bootstrap-test.html', title='bootstrap_test')
 
 @app.route('/about')
 def about():

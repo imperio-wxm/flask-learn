@@ -13,7 +13,7 @@ app = Flask(__name__)
 bootstrap = Bootstrap(app)
 
 nav = Nav()
-
+# 添加导航条
 @nav.navigation()
 def top():
     return Navbar(
@@ -21,7 +21,6 @@ def top():
          View(u'首页','about'),View(u'关于','about'),
         View(u'服务','about'),View(u'标签','about'),
     )
-
 nav.init_app(app)
 
 @app.route('/')

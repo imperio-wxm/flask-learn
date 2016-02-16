@@ -2,7 +2,7 @@
 #-*- coding: utf-8 -*-
 __author__ = "wxmimperio"
 
-from flask.ext.bootstrap import Bootstrap
+from flask_bootstrap import Bootstrap
 from flask import Flask, render_template,request
 from livereload import Server
 

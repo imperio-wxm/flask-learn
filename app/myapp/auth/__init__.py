@@ -6,3 +6,5 @@ __author__ = "wxmimperio"
 from flask import Blueprint
 
 auth = Blueprint('auth',__name__)
+
+import forms,views

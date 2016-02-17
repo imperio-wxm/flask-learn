@@ -3,7 +3,7 @@
 __author__ = "wxmimperio"
 
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.event import listen
+from sqlalchemy import event
 from flask import Flask,render_template
 from os import path
 from flask.ext.script import Manager,Shell
@@ -11,6 +11,7 @@ from flask_migrate import Migrate,MigrateCommand
 
 app = Flask(__name__)
 manager = Manager(app)
+
 
 # 当前项目绝对路径
 basedir = path.abspath(path.dirname(__file__))
@@ -55,11 +56,10 @@ class Users(db.Model):
 
     # 创建触发器触发函数，每次创建User时对应的Role都是Guest
     @staticmethod
-    def on_created(target,value,initiator):
+    def on_created(target, value, oldvalue, initiator):
         target.role = Roles.query.filter_by(name='Guests').first()
-
 # 数据库监听
-listen(Users.name,'append',Users.on_created)
+db.event.listen(Users.name,'set',Users.on_created)
 
 if __name__ == '__main__':
     #app.run(debug=True)

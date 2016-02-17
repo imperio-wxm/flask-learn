@@ -7,6 +7,7 @@ from sqlalchemy.event import listen
 from flask import Flask,render_template
 from os import path
 from flask.ext.script import Manager,Shell
+from flask_migrate import Migrate,MigrateCommand
 
 app = Flask(__name__)
 manager = Manager(app)
@@ -20,6 +21,11 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@127.0.0.1/flask_db'
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
+
+# 数据库迁移
+migrate = Migrate(app,db)
+# 添加新的command
+manager.add_command('db',MigrateCommand)
 
 @app.route('/')
 def sqlAlchemy_test():

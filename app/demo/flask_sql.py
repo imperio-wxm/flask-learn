@@ -3,6 +3,7 @@
 __author__ = "wxmimperio"
 
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.event import listen
 from flask import Flask,render_template
 from os import path
 from flask.ext.script import Manager,Shell
@@ -32,6 +33,12 @@ class Roles(db.Model):
     # 主键关联d
     users = db.relationship('Users',backref='role')
 
+    # 定义数据库初始化触发器
+    @staticmethod
+    def seed():
+        db.session.add_all(map(lambda r:Roles(r),['Guests','Administrator']))
+        db.session.commit()
+
 class Users(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
@@ -40,6 +47,13 @@ class Users(db.Model):
     # 外键关联
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
 
+    # 创建触发器触发函数，每次创建User时对应的Role都是Guest
+    @staticmethod
+    def on_created(target,value,initiator):
+        target.role = Roles.query.filter_by(name='Guests').first()
+
+# 数据库监听
+listen(Users.name,'append',Users.on_created)
 
 if __name__ == '__main__':
     #app.run(debug=True)

@@ -30,7 +30,7 @@ class Roles(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), nullable=True)
     # 主键关联
-    users = db.relationship('Users',backref='roles')
+    users = db.relationship('Users',backref='role')
 
 class Users(db.Model):
     __tablename__ = 'users'

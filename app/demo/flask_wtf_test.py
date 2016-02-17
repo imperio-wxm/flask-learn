@@ -17,7 +17,7 @@ def loginTest():
     # 引入登陆方法
     form = loginForm()
     flash(u'登陆成功')
-    return render_template('flask_wtf_form.html',form=form,title=u'登陆')
+    return render_template('flask_wtf_form.html', form=form, title=u'登陆')
 
 if __name__ == '__main__':
     live_server = Server(app.wsgi_app)

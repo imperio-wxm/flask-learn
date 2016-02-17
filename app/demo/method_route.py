@@ -30,6 +30,6 @@ def login():
         username = request.args['username']
         password = request.args['password']
     print username,password
-    return render_template('login.html',method=request.method)
+    return render_template('login.html', method=request.method)
 if __name__ == '__main__':
     app.run(debug=True)

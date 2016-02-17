@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html',title='<h1>Hello World</h1>',
+    return render_template('index.html', title='<h1>Hello World</h1>',
                            body='- python Header2')
 
 # 过滤器装饰，过滤器名字叫md

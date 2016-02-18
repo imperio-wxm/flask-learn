@@ -3,12 +3,15 @@
 __author__ = "wxmimperio"
 
 from flask import render_template
+
 from . import auth
+from . import forms
+
 
 # 引用蓝图
 @auth.route('/login',methods=['GET','POST'])
 def login():
-    return render_template('login.html',title=u'登录',form=form)
+    return render_template('login.html',title=u'登录',form=forms)
 
 @auth.route('/register',methods=['GET','POST'])
 def register():

@@ -25,7 +25,7 @@ def create_app():
     bootstrap.init_app(app)
 
     # 注册blueprint
-    app.register_blueprint(auth_blueprint,'/auth')
+    app.register_blueprint(auth_blueprint,url_prefix='/auth')
     app.register_blueprint(main_blueprint)
 
     return app

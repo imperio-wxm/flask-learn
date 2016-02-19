@@ -8,12 +8,14 @@ from wtforms.validators import DataRequired, EqualTo, Email, Regexp, Length
 
 
 class LoginForm(Form):
+    """登录表单"""
     username = StringField(label=u'用户名', validators=[DataRequired()])
     password = PasswordField(label=u'密码', validators=[DataRequired()])
     submit = SubmitField(label=u'提交')
 
 
 class RegistrationForm(Form):
+    """注册表单"""
     email = StringField(u'邮箱地址', validators=[DataRequired(),Length(1, 64),Email()])
 
     username = StringField(u'用户名', validators=[DataRequired(),Length(1, 64),

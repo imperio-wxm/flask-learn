@@ -3,7 +3,7 @@
 __author__ = "wxmimperio"
 
 from flask import render_template, redirect,url_for
-from flask_login import login_user
+from flask_login import login_user, logout_user
 
 from . import auth
 from . import forms
@@ -23,6 +23,11 @@ def login():
             login_user(user)
             return redirect(url_for('main.index'))
     return render_template('login.html',title=u'登录',form=forms)
+
+@auth.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('auth.login'))
 
 @auth.route('/register',methods=['GET','POST'])
 def register():

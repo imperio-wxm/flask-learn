@@ -20,6 +20,7 @@ def login():
 def register():
     form = RegistrationForm()
 
+    # 表单提交创建用户
     if form.validate_on_submit():
         user = User(email=form.email.data,
                     name=form.username.data,
@@ -27,5 +28,6 @@ def register():
 
         db.session.add(user)
         db.session.submit()
+        # url_for中须添加蓝图名字
         return redirect(url_for('auth.login'))
     return render_template('register.html',title=u'注册',form=form)

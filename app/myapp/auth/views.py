@@ -3,10 +3,11 @@
 __author__ = "wxmimperio"
 
 from flask import render_template, redirect,url_for
+from flask_login import login_user
 
 from . import auth
 from . import forms
-from .forms import RegistrationForm
+from .forms import RegistrationForm,LoginForm
 from .. import db
 from ..models import User
 
@@ -14,6 +15,13 @@ from ..models import User
 # 引用蓝图
 @auth.route('/login',methods=['GET','POST'])
 def login():
+    form = LoginForm()
+
+    if form.validate_on_submit():
+        user = User.query.filter_by(name=form.username.data, password=form.password.data).first()
+        if user is not None:
+            login_user(user)
+            return redirect(url_for('main.index'))
     return render_template('login.html',title=u'登录',form=forms)
 
 @auth.route('/register',methods=['GET','POST'])

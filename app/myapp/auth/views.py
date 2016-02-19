@@ -2,10 +2,13 @@
 #-*- coding: utf-8 -*-
 __author__ = "wxmimperio"
 
-from flask import render_template
+from flask import render_template, redirect,url_for
 
 from . import auth
 from . import forms
+from .forms import RegistrationForm
+from .. import db
+from ..models import User
 
 
 # 引用蓝图
@@ -15,7 +18,7 @@ def login():
 
 @auth.route('/register',methods=['GET','POST'])
 def register():
-    form = forms.RegistrationForm()
+    form = RegistrationForm()
 
     if form.validate_on_submit():
         user = User(email=form.email.data,
@@ -24,6 +27,5 @@ def register():
 
         db.session.add(user)
         db.session.submit()
-
-        return redirect(ur)
-    return render_template('register.html',title=u'注册')
+        return redirect(url_for('auth.login'))
+    return render_template('register.html',title=u'注册',form=form)

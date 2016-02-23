@@ -3,6 +3,11 @@
 __author__ = "wxmimperio"
 
 from flask import render_template,request
+from flask.ext.login import  login_required, current_user
+from .forms import CommentForm, PostForm
+from flask_babel import gettext as _
+from  .. import db
+from ..models import Post, Comment
 from . import main
 
 @main.route('/')
@@ -25,3 +30,19 @@ def page_not_found(error):
 @main.app_template_test('current_link')
 def is_current_link(link):
     return link == request.path
+
+@main.route('/posts/<int:id>', method=['GET','POST'])
+def post(id):
+    # detail 详情
+    post = Post.query.get_or_404(id)
+
+    # 评论
+    form = CommentForm()
+
+    # 保存评论
+    if form.validate_on_submit():
+        comment = Comment(author=current_user,body=form.body.data,post=post)
+        db.session.add(comment)
+        db.session.commit()
+
+    return  render_template('posts/detail.html',title=post.title,form=form,post=post)

@@ -5,6 +5,7 @@ __author__ = "wxmimperio"
 from flask_login import UserMixin
 
 from . import db, login_manager
+from datetime import datetime
 
 
 class Roles(db.Model):
@@ -36,3 +37,24 @@ def load_user(user_id):
 
 
 db.event.listen(User.name,'set',User.on_created)
+
+class Post(db.Model):
+    __tablename__ = 'posts'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(20))
+    body = db.Column(db.String(100))
+    body_html = db.Column(db.String(100))
+    created = db.Column(db.DateTime, index=True,default=datetime.utcnow)
+
+    @staticmethod
+    def on_body_changed(target, value, oldvalue, initiator):
+        target.body_html = value
+
+db.event.listen(Post.body,'set',Post.on_body_changed)
+
+
+class Comnet(db.Model):
+    __tablename__ = 'coments'
+    id = db.Column(db.Integer, primary_key=True)
+    body = db.Column(db.String(100))
+    created = db.Column(db.DateTime, index=True, default=datetime.utcnow())

@@ -27,6 +27,7 @@ class User(UserMixin, db.Model):
     name = db.Column(db.String(20), nullable=True)
     password = db.Column(db.String(20), nullable=True)
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
+    posts = db.relationship('Posts', backref='author')
 
     @staticmethod
     def on_created(target, value, oldvalue, initiator):
@@ -50,6 +51,7 @@ class Post(db.Model):
     created = db.Column(db.DateTime, index=True,default=datetime.utcnow)
 
     comments = db.relationship('Comment', backref='post')
+    author_id = db.relationship(db.Integer, db.ForeignKey('users.id'))
 
     @staticmethod
     def on_body_changed(target, value, oldvalue, initiator):

@@ -2,7 +2,7 @@
 #-*- coding: utf-8 -*-
 __author__ = "wxmimperio"
 
-from flask import render_template,request
+from flask import render_template, request, flash, redirect, url_for, current_app
 from flask.ext.login import  login_required, current_user
 from .forms import CommentForm, PostForm
 from flask_babel import gettext as _
@@ -46,3 +46,31 @@ def post(id):
         db.session.commit()
 
     return  render_template('posts/detail.html',title=post.title,form=form,post=post)
+
+@main.route('/edit', methods=['GET','POST'])
+@main.route('/edit/<int:id>', methods=['GET','POST'])
+def edit(id=0):
+    form = PostForm()
+
+    if id == 0:
+        post = Post(author=current_user)
+    else:
+        post = Post.query.get_or_404(id)
+
+    if form.validate_on_submit():
+        post.body = form.body.data
+        post.title = form.title.data
+
+        db.session.add(post)
+        db.session.commit()
+
+        return redirect(url_for('.post', id=post.id))
+
+    form.title.data = post.title
+    form.body.data = post.body
+
+    title = _(u'添加新文章')
+    if id > 0:
+        title = _(u'编辑 - %(title)',title=post.title)
+
+    return  render_template('posts/edit.html',title=title,form=form,post=post)

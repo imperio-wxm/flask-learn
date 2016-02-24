@@ -49,10 +49,13 @@ def post(id):
 
 @main.route('/edit', methods=['GET','POST'])
 @main.route('/edit/<int:id>', methods=['GET','POST'])
+# 必须用户登录
+@login_required
 def edit(id=0):
     form = PostForm()
 
     if id == 0:
+        # 当前登录用户
         post = Post(author=current_user)
     else:
         post = Post.query.get_or_404(id)

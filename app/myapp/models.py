@@ -3,7 +3,6 @@ from flask_login import UserMixin, AnonymousUserMixin
 from datetime import datetime
 from markdown import markdown
 
-
 class Role(db.Model):
     __tablename__ = 'roles'
     id = db.Column(db.Integer, primary_key=True)
